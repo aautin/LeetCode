@@ -73,16 +73,23 @@ int romanToInt(char* s) {
 // substitute the value to have an order in the string
     short int i = 0;
     while (s[i]) {
-        if (s[i] == 'C')
-            s[i] = 100;
-        else if (s[i] == 'L')
-            s[i] = 50;
-        else if (s[i] == 'X')
-            s[i] = 10;
-        else if (s[i] == 'V')
-            s[i] = 5;
-        else if (s[i] == 'I')
-            s[i] = 1;
+        switch (s[i]) {
+            case 'C':
+                s[i] = 100;
+                break;
+            case 'L':
+                s[i] = 50;
+                break;
+            case 'X':
+                s[i] = 10;
+                break;
+            case 'V':
+                s[i] = 5;
+                break;
+            case 'I':
+                s[i] = 1;
+                break;
+        }
         i++;
     }
 
@@ -93,16 +100,18 @@ int romanToInt(char* s) {
         else if (*s == 'D')
             i += 500;
         else if (*s == 100) {
-            if (*(s + 1) == 'M') {
-                i += 900;
-                s++;
+            switch (*(s + 1)) {
+                case 'M':
+                    i += 900;
+                    s++;
+                    break;
+                case 'D':
+                    i += 400;
+                    s++;
+                    break;
+                default:
+                    i += 100;        
             }
-            else if (*(s + 1) == 'D') {
-                i += 400;
-                s++;
-            }
-            else
-                i += 100;
         }
         else if (*s < *(s + 1)) {
             i += *(s + 1) - *(s);
